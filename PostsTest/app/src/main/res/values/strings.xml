@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Posts Test</string>
+
+    <string name="retry">Retry</string>
+    <string name="post_error">An error occurred while loading</string>
+    <string name="description">Description</string>
+    <string name="user">User</string>
+    <string name="comments">Comments</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="website">Website</string>
+</resources>

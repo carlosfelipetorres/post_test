@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/post_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layoutAnimation="@anim/layout_animation"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:adapter="@{vm.page == 0 ? vm.getPostListAdapter() : vm.getFavoriteListAdapter()}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.carlostorres.poststest.view.posts.viewmodels.PostListViewModel" />
+    </data>
+</layout>
