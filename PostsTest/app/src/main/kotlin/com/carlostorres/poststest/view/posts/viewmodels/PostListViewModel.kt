@@ -21,12 +21,12 @@ class PostListViewModel(private val postDao: PostDao) : BaseViewModel() {
     val postListAdapter: PostListAdapter = PostListAdapter({
         navigation.value = it
         navigation.value = null
-    }, false)
+    }, false, postDao)
 
     val favoriteListAdapter: PostListAdapter = PostListAdapter({
         navigation.value = it
         navigation.value = null
-    }, true)
+    }, true, postDao)
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
@@ -50,6 +50,7 @@ class PostListViewModel(private val postDao: PostDao) : BaseViewModel() {
                 .concatMap { dbPostList ->
                     if (dbPostList.isEmpty())
                         postApi.getPosts().concatMap { apiPostList ->
+                            apiPostList.forEachIndexed {index, post -> post.read = index > 20 }
                             postDao.insertAll(*apiPostList.toTypedArray())
                             Observable.just(apiPostList)
                         }

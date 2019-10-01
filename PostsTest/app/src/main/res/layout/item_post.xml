@@ -27,7 +27,7 @@
             <ImageView android:id="@+id/readIcon"
                 android:layout_width="@dimen/dimen10"
                 android:layout_height="@dimen/dimen10"
-                android:src="@drawable/ic_read"
+                android:src="@drawable/round_button_colored_blue"
                 android:visibility="@{vm.getPostRead() ? View.GONE : View.VISIBLE}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

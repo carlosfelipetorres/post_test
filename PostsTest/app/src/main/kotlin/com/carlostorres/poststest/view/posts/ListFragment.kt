@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -18,6 +19,11 @@ import com.carlostorres.poststest.databinding.FragmentListBinding
 import com.carlostorres.poststest.injection.ViewModelFactory
 import com.carlostorres.poststest.view.posts.viewmodels.PostListViewModel
 import com.google.android.material.snackbar.Snackbar
+import androidx.recyclerview.widget.ItemTouchHelper
+import com.carlostorres.poststest.view.posts.adapter.SwipeDeleteCallback
+
+
+
 
 class ListFragment : Fragment() {
 
@@ -36,6 +42,8 @@ class ListFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, ViewModelFactory(activity as AppCompatActivity))[PostListViewModel::class.java]
         viewModel.page = arguments?.getInt(BUNDLE_KEY_PAGE, 0)
         binding.postList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        val itemTouchHelper = ItemTouchHelper(SwipeDeleteCallback(if (viewModel.page == 0) viewModel.postListAdapter else viewModel.favoriteListAdapter, activity as AppCompatActivity))
+        itemTouchHelper.attachToRecyclerView(binding.postList)
 
         viewModel.errorMessage.observe(this, Observer {
             errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
